@@ -1,0 +1,4 @@
+package com.example.turistguide2.controller;
+
+public class Controller {
+}
