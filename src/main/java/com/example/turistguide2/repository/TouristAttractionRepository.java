@@ -9,11 +9,12 @@ import java.util.List;
 
 @Repository
 public class TouristAttractionRepository {
+    // Liste med almindelige turistattraktioner (mock data)
     private final List<TouristAttraction> touristAttractions = new ArrayList<>();
 
-    // Constructor with sample data
+    // Konstruktør med eksempeldata (standardattraktion)
     public TouristAttractionRepository() {
-        // Add a default attraction when the repository is initialized
+        // Tilføjer en standardattraktion ved initialisering
         touristAttractions.add(new TouristAttraction(
                 "Den Lille Havfrue",
                 "En ikonisk statue på Langelinie.",
@@ -22,44 +23,47 @@ public class TouristAttractionRepository {
         ));
     }
 
-    // Add a new attraction
+    // Tilføj en ny turistattraktion til listen
     public TouristAttraction addTouristAttraction(TouristAttraction attraction) {
         touristAttractions.add(attraction);
         return attraction;
     }
 
-    // Update an attraction by name
+    // Opdater en eksisterende attraktion ved navn
     public TouristAttraction updateTouristAttraction(String name, String description) {
         for (TouristAttraction attraction : touristAttractions) {
+            // Opdater beskrivelsen hvis navnet matcher
             if (attraction.getName().equalsIgnoreCase(name)) {
                 attraction.setDescription(description);
                 return attraction;
             }
         }
-        return null;
+        return null; // Returner null hvis ikke fundet
     }
 
-    // Delete an attraction by name
+    // Slet en attraktion fra listen baseret på navn
     public TouristAttraction deleteTouristAttraction(String name) {
+        // Find attraktionen først
         TouristAttraction attractionToDelete = findTouristAttractionByName(name);
         if (attractionToDelete != null) {
-            touristAttractions.remove(attractionToDelete);
-            return attractionToDelete;
+            touristAttractions.remove(attractionToDelete); // Fjern fra listen
+            return attractionToDelete; // Returner den slettede
         }
-        return null;
+        return null; // Returner null hvis ikke fundet
     }
 
-    // Find an attraction by name
+    // Find en enkelt attraktion ved navn (case-insensitive)
     public TouristAttraction findTouristAttractionByName(String name) {
+        // Gennemgå hele listen og retur 1. match
         for (TouristAttraction attraction : touristAttractions) {
             if (attraction.getName().equalsIgnoreCase(name)) {
                 return attraction;
             }
         }
-        return null;
+        return null; // Returner null hvis ikke fundet
     }
 
-    // Get all attractions
+    // Hent alle turistattraktioner (som en ny ArrayList for at undgå sideffects)
     public List<TouristAttraction> getAllAttractions() {
         return new ArrayList<>(touristAttractions);
     }
