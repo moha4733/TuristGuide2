@@ -20,6 +20,35 @@ public class TouristAttractionRepository {
                 "En ikonisk statue på Langelinie.",
                 "København",
                 Arrays.asList("landmark", "statue", "historie")
+
+        ));
+        touristAttractions.add(new TouristAttraction(
+                "Junes El-Sayed",
+                "useriøs spiller.",
+                "Nykøbing Falster",
+                Arrays.asList("fodbold", "spiller", "professionel diver")
+
+        ));
+        touristAttractions.add(new TouristAttraction(
+                "Bella Sky",
+                "En af skandinaviske flotteste hotel.",
+                "Amager",
+                Arrays.asList("hotel", "bygning", "arkitektur")
+
+        ));
+        touristAttractions.add(new TouristAttraction(
+                "Amalienborg",
+                " Det danske kongens familiens hjem.",
+                "København",
+                Arrays.asList("slot", "kongeligt", "historie")
+
+        ));
+        touristAttractions.add(new TouristAttraction(
+                "SMK",
+                "Museum for kunst.",
+                "København",
+                Arrays.asList("kunst", "galleri", "museum")
+
         ));
     }
 
