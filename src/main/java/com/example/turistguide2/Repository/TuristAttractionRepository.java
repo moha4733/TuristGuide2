@@ -1,6 +1,6 @@
-package com.example.turistguide2.repository;
+package com.example.turistguide2.Repository;
 
-import com.example.turistguide2.model.TouristAttraction;
+import com.example.turistguide2.Model.TouristAttraction;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -8,12 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class TouristAttractionRepository {
+public class TuristAttractionRepository {
     // Liste med almindelige turistattraktioner (mock data)
     private final List<TouristAttraction> touristAttractions = new ArrayList<>();
 
     // Konstruktør med eksempeldata (standardattraktion)
-    public TouristAttractionRepository() {
+    public TuristAttractionRepository() {
         // Tilføjer en standardattraktion ved initialisering
         touristAttractions.add(new TouristAttraction(
                 "Den Lille Havfrue",
