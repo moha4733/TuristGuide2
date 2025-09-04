@@ -19,13 +19,34 @@ public class TouristAttraction {
     }
 
 
-    public String getName() { return name; }
-    public String getDescription() { return description; }
-    public String getCity() { return city; }
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+
     public List<String> getTags() { return tags; }
 
-    public void setName(String name) { this.name = name; }
-    public void setDescription(String description) { this.description = description; }
-    public void setCity(String city) { this.city = city; }
-    public void setTags(List<String> tags) { this.tags = tags; }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
 }
