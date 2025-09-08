@@ -31,10 +31,7 @@ public class TouristService {
     }
 
     public List<String> getTouristAttractionTags(String name) {
-        return repository.getTouristAttractionTags(name);
+        return repository.getTouristAttractionTags();
     }
 
-    public void saveAttraction(TouristAttraction attraction) {
-        return repository.saveAttraction();
-    }
 }
