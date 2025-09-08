@@ -23,7 +23,7 @@ public class TuristGuideController {
 
     @GetMapping()
     public ResponseEntity<List<TouristAttraction>> getTouristAttractions() {
-        List<TouristAttraction> attractions = touristService.getAllAttractions();
+        List<TouristAttraction> attractions = turistGuideService.getAllAttractions();
         return new ResponseEntity<>(attractions, HttpStatus.OK);
     }
 
