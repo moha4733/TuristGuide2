@@ -26,8 +26,8 @@ public class TuristGuideController {
         return new ResponseEntity<>(attractions, HttpStatus.OK);
     }
 
-    @GetMapping("/{name}")
-    public class T
+//    @GetMapping("/{name}")
+//    public class T
 }
 
 
