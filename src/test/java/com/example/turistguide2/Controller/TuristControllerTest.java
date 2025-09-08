@@ -1,32 +1,29 @@
 package com.example.turistguide2.Controller;
 
-import com.example.turistguide2.Service.TuristGuideService;
+import com.example.turistguide2.Service.TuristService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-@WebMvcTest(TuristGuideController.class)
-class TuristGuideControllerTest {
+@WebMvcTest(TuristController.class)
+class TuristControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockitoBean
-    private TuristGuideService turistGuideService;
+    private TuristService turistService;
 
     @BeforeEach
     void setUp() {
