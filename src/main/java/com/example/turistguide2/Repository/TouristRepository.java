@@ -8,12 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class TuristRepository {
+public class TouristRepository {
     // Liste med almindelige turistattraktioner (mock data)
     private final List<TouristAttraction> touristAttractions = new ArrayList<>();
 
     // Konstruktør med eksempeldata (standardattraktion)
-    public TuristRepository() {
+    public TouristRepository() {
         // Tilføjer en standardattraktion ved initialisering
         touristAttractions.add(new TouristAttraction(
                 "Den Lille Havfrue",
@@ -95,5 +95,13 @@ public class TuristRepository {
     // Hent alle turistattraktioner (som en ny ArrayList for at undgå sideffects)
     public List<TouristAttraction> getAllAttractions() {
         return new ArrayList<>(touristAttractions);
+    }
+
+    public List<String> getTouristAttractionTags() {
+        return null;
+    }
+
+    public void saveAttraction() {
+        return;
     }
 }

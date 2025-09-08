@@ -2,7 +2,7 @@ package com.example.turistguide2.Controller;
 
 import ch.qos.logback.core.model.Model;
 import com.example.turistguide2.Model.TouristAttraction;
-import com.example.turistguide2.Service.TuristService;
+import com.example.turistguide2.Service.TouristService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,21 +14,21 @@ import java.util.List;
 @RequestMapping("/attractions")
 public class TouristController {
 
-    private final TuristService turistService;
+    private final TouristService touristService;
 
-    public TouristController(TuristService turistService) {
-        this.turistService = turistService;
+    public TouristController(TouristService touristService) {
+        this.touristService = touristService;
     }
 
     @GetMapping
     public ResponseEntity<List<TouristAttraction>> getTouristAttractions() {
-        List<TouristAttraction> attractions = turistService.getAllAttractions();
+        List<TouristAttraction> attractions = touristService.getAllAttractions();
         return new ResponseEntity<>(attractions, HttpStatus.OK);
     }
 
     @GetMapping("/{name}")
     public ResponseEntity<TouristAttraction> getTouristAttraction(@PathVariable String name) {
-        TouristAttraction attraction = turistService.findTouristAttractionByName(name);
+        TouristAttraction attraction = touristService.findTouristAttractionByName(name);
         if (attraction == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -37,7 +37,7 @@ public class TouristController {
 
     @GetMapping("/{name}/tags")
     public ResponseEntity<List<String>> getTouristAttractionTags(@PathVariable String name) {
-        List<String> tags = turistService.getTouristAttractionTags(name);
+        List<String> tags = touristService.getTouristAttractionTags(name);
         if (tags == null || tags.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -51,7 +51,7 @@ public class TouristController {
 
     @PostMapping("/save")
     public String saveAttraction(@ModelAttribute TouristAttraction attraction) {
-        turistService.saveAttraction(attraction);
+        touristService.saveAttraction(attraction);
         return "redirect:/attractions";
     }
 
@@ -62,7 +62,7 @@ public class TouristController {
 
     @PostMapping("/update")
     public ResponseEntity<TouristAttraction> updateTouristAttraction(@RequestBody TouristAttraction attraction) {
-        TouristAttraction updatedAttraction = turistService.updateTouristAttraction(attraction);
+        TouristAttraction updatedAttraction = touristService.updateTouristAttraction(attraction);
         if (updatedAttraction != null) {
             return new ResponseEntity<>(updatedAttraction, HttpStatus.OK);
         }
@@ -71,7 +71,7 @@ public class TouristController {
 
     @PostMapping("/delete/{name}")
     public ResponseEntity<TouristAttraction> deleteTouristAttraction(@PathVariable String name) {
-        TouristAttraction deletedAttraction = turistService.deleteTouristAttraction(name);
+        TouristAttraction deletedAttraction = touristService.deleteTouristAttraction(name);
         if (deletedAttraction == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

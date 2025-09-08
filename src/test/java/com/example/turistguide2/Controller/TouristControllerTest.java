@@ -1,6 +1,6 @@
 package com.example.turistguide2.Controller;
 
-import com.example.turistguide2.Service.TuristService;
+import com.example.turistguide2.Service.TouristService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,13 +17,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @WebMvcTest(TouristController.class)
-class TuristControllerTest {
+class TouristControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockitoBean
-    private TuristService turistService;
+    private TouristService touristService;
 
     @BeforeEach
     void setUp() {
