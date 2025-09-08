@@ -34,4 +34,11 @@ public class TouristService {
         return repository.getTouristAttractionTags();
     }
 
+    public void saveAttraction(TouristAttraction attraction) {
+
+    }
+
+    public TouristAttraction updateTouristAttraction(TouristAttraction attraction) {
+        return attraction;
+    }
 }

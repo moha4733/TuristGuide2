@@ -58,6 +58,7 @@ public class TouristController {
     @GetMapping("/{name}/edit")
     public String showEditForm(@PathVariable String name, Model model) {
         // ...
+        return name;
     }
 
     @PostMapping("/update")
