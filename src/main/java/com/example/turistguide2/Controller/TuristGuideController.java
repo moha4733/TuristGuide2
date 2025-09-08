@@ -1,3 +1,4 @@
+
 package com.example.turistguide2.Controller;
 
 import com.example.turistguide2.Model.TouristAttraction;
@@ -27,7 +28,5 @@ public class TuristGuideController {
     }
 
 //    @GetMapping("/{name}")
-//    public class T
+//    public class Ts
 }
-
-
