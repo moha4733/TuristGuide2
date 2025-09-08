@@ -1,8 +1,8 @@
-package com.example.turistguide2.Controller;
+package com.example.touristguide2.Controller;
 
 import ch.qos.logback.core.model.Model;
-import com.example.turistguide2.Model.TouristAttraction;
-import com.example.turistguide2.Service.TouristService;
+import com.example.touristguide2.Model.TouristAttraction;
+import com.example.touristguide2.Service.TouristService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

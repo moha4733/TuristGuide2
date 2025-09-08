@@ -1,6 +1,6 @@
-package com.example.turistguide2.Controller;
+package com.example.touristguide2.Controller;
 
-import com.example.turistguide2.Service.TouristService;
+import com.example.touristguide2.Service.TouristService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
