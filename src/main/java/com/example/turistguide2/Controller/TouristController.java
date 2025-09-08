@@ -1,5 +1,6 @@
 package com.example.turistguide2.Controller;
 
+import ch.qos.logback.core.model.Model;
 import com.example.turistguide2.Model.TouristAttraction;
 import com.example.turistguide2.Service.TuristService;
 import org.springframework.http.HttpStatus;
@@ -11,11 +12,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/attractions")
-public class TuristController {
+public class TouristController {
 
     private final TuristService turistService;
 
-    public TuristController(TuristService turistService) {
+    public TouristController(TuristService turistService) {
         this.turistService = turistService;
     }
 
@@ -45,7 +46,7 @@ public class TuristController {
 
     @GetMapping("/add")
     public String showAddForm() {
-        return "addAttraction"; // Assumes a template named "addAttraction"
+        return "addAttraction";
     }
 
     @PostMapping("/save")
@@ -56,12 +57,7 @@ public class TuristController {
 
     @GetMapping("/{name}/edit")
     public String showEditForm(@PathVariable String name, Model model) {
-        TouristAttraction attraction = turistService.findTouristAttractionByName(name);
-        if (attraction != null) {
-            model.addAttribute("attraction", attraction);
-            return "editAttraction"; // Assumes a template named "editAttraction"
-        }
-        return "redirect:/attractions";
+        // ...
     }
 
     @PostMapping("/update")
