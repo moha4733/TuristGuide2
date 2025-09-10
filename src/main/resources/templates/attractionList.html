@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th= lang="en">
+<html xmlns:th= "http://www.thymeleaf.org"  lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Show users</title>
+    <title>Touristattraction</title>
 </head>
 <body>
-<h1>Turistattraction</h1>
+<h1>Touristattraction</h1>
 <table>
-    <tr th:if="${users.isEmpty()}"></tr>
-    <tr th:if="${!users.isEmpty()}">
+    <tr th:if="${attractions.isEmpty()}"></tr>
+    <tr th:if="${!attractions.isEmpty()}">
         <th>Name</th> <th>Beskrivelse</th> <th>By</th>
     </tr>
-    <tr th:each="user: ${users}">
-        <td th:text="${name.name}"></td>
-        <td th:text="${name.email}"></td>
-        <td th:text="${name.name}"></td>
-        <td> <a th:href="@{/name/edit/{name}(name=${name.name})}"> Edit</a> </td>
+    <tr th:each="attraction: ${attractions}">
+        <td th:text="${attraction.name}"></td>
+        <td th:text="${attaction.description}"></td>
+        <td th:text="${attraction.location}"></td>
+        <td> <a th:href="@{/attractions/edit/{name}(name=${attraction.name})}"> Edit</a> </td>
     </tr>
 </table>
 
