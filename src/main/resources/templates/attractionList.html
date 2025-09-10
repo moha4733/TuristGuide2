@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th= lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Show users</title>
 </head>
 <body>
+<h1>Turistattraction</h1>
+<table>
+    <tr th:if="${users.isEmpty()}"></tr>
+    <tr th:if="${!users.isEmpty()}">
+        <th>Name</th> <th>Beskrivelse</th> <th>By</th>
+    </tr>
+    <tr th:each="user: ${users}">
+        <td th:text="${name.name}"></td>
+        <td th:text="${name.email}"></td>
+        <td th:text="${name.name}"></td>
+        <td> <a th:href="@{/name/edit/{name}(name=${name.name})}"> Edit</a> </td>
+    </tr>
+</table>
+
+<a th:href="@{/name/register}">Register a attraction</a>
+
+
 
 </body>
 </html>
