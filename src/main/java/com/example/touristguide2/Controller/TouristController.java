@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -18,15 +19,13 @@ public class TouristController {
         this.touristService = touristService;
     }
 
-    // Viser listen af attraktioner i attractionList.html
     @GetMapping
     public String getTouristAttractions(Model model) {
         List<TouristAttraction> attractions = touristService.getAllAttractions();
         model.addAttribute("attractions", attractions);
-        return "attractionList"; // -> attractionList.html
+        return "attractionList";
     }
 
-    // Viser tags for en specifik attraktion i tags.html
     @GetMapping("/{name}/tags")
     public String getTouristAttractionTags(@PathVariable String name, Model model) {
         TouristAttraction attraction = touristService.findTouristAttractionByName(name);
@@ -35,19 +34,47 @@ public class TouristController {
         }
         model.addAttribute("attraction", attraction);
         model.addAttribute("tags", touristService.getTouristAttractionTags(name));
-        return "tags"; // -> tags.html
+
+        return "tags";
     }
 
-    // Viser form til at tilføje en ny attraktion
     @GetMapping("/add")
-    public String showAddForm() {
-        return "addAttraction"; // -> addAttraction.html
+    public String showAddForm(Model model) {
+        model.addAttribute("attraction", new TouristAttraction("", "", "",new ArrayList<>()));
+        model.addAttribute("location", touristService.getAllLocations());
+        model.addAttribute("Tags", touristService.getAllTags());
+
+        return "addAttraction";
     }
 
-    // Gemmer ny attraktion
     @PostMapping("/save")
     public String saveAttraction(@ModelAttribute TouristAttraction attraction) {
         touristService.saveAttraction(attraction);
         return "redirect:/attractions";
     }
+
+    @GetMapping("/{name}/edit")
+    public String showEditForm(@PathVariable String name, Model model) {
+        TouristAttraction attraction = touristService.findTouristAttractionByName(name);
+        if (attraction == null) {
+            return "redirect:/attractions";
+        }
+        model.addAttribute("attraction", attraction);
+        model.addAttribute("Tags", touristService.getAllTags());
+        model.addAttribute("Locations", touristService.getAllLocations());
+        return "editAttraction";
+    }
+// TODO - VI SKAL HAVE KIGGET PÅ DEN - I DE TO ANDRE LAG
+//    @PostMapping("/update")
+//    public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
+//        touristService.updateAttraction(attraction);
+//        return "redirect:/attractions";
+//    }
+
+    @PostMapping("/delete/{name}")
+    public String deleteAttraction(@PathVariable String name) {
+        touristService.deleteAttraction(name);
+        return "redirect:/attractions";
+    }
+
 }

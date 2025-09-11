@@ -18,12 +18,8 @@ public class TouristService {
         return repository.getAllAttractions();
     }
 
-    public TouristAttraction deleteTouristAttraction(String name) {
-        return repository.deleteTouristAttraction(name);
-    }
-
-    public TouristAttraction updateTouristAttraction(String name, String newDescription) {
-        return repository.updateTouristAttraction(name, newDescription);
+    public TouristAttraction deleteAttraction(String name) {
+        return repository.deleteAttraction(name);
     }
 
     public TouristAttraction findTouristAttractionByName(String name) {
@@ -34,12 +30,21 @@ public class TouristService {
         return repository.getTouristAttractionTags();
     }
 
-    public void saveAttraction(TouristAttraction attraction) {
-
+    public TouristAttraction saveAttraction(TouristAttraction attraction) {
+        return repository.saveAttraction(attraction);
     }
 
-    public TouristAttraction updateTouristAttraction(TouristAttraction attraction) {
-        return attraction;
+//    public TouristAttraction updateAttraction(TouristAttraction attraction) {
+//        TouristRepository.saveAttraction(attraction);
+//        return attraction;
+//
+//    }
+    public List<String> getAllTags() {
+        return repository.getTouristAttractionTags();
+    }
+
+    public List<String> getAllLocations() {
+        return repository.getLocation();
     }
 }
 
