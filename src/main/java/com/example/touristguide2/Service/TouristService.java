@@ -8,34 +8,34 @@ import java.util.List;
 
 @Service
 public class TouristService {
-    private TouristRepository repository;
+    private TouristRepository touristRepository;
 
     public TouristService(TouristRepository touristRepository){
-        this.repository = touristRepository;
+        this.touristRepository = touristRepository;
     }
 
     public List<TouristAttraction> getAllAttractions() {
-        return repository.getAllAttractions();
+        return touristRepository.getAllAttractions();
     }
 
     public TouristAttraction deleteAttraction(String name) {
-        return repository.deleteAttraction(name);
+        return touristRepository.deleteAttraction(name);
     }
 
     public TouristAttraction findTouristAttractionByName(String name) {
-        return repository.findTouristAttractionByName(name);
+        return touristRepository.findTouristAttractionByName(name);
     }
 
     public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction) {
-        return repository.addTouristAttraction(touristAttraction);
+        return touristRepository.addTouristAttraction(touristAttraction);
     }
 
     public List<String> getTouristAttractionTags(String name) {
-        return repository.getTouristAttractionTags();
+        return touristRepository.getTouristAttractionTags();
     }
 
     public TouristAttraction saveAttraction(TouristAttraction attraction) {
-        return repository.saveAttraction(attraction);
+        return touristRepository.saveAttraction(attraction);
     }
 
 //    public TouristAttraction updateAttraction(TouristAttraction attraction) {
@@ -44,15 +44,15 @@ public class TouristService {
 //    }
 
     public TouristAttraction updateAttraction(String name, String newDescription) {
-        return repository.updateAttraction(name, newDescription);
+        return touristRepository.updateAttraction(name, newDescription);
     }
 
     public List<String> getAllTags() {
-        return repository.getTouristAttractionTags();
+        return touristRepository.getTouristAttractionTags();
     }
 
     public List<String> getAllLocations() {
-        return repository.getLocation();
+        return touristRepository.getLocation();
     }
 }
 

@@ -25,7 +25,7 @@ public class TouristController {
     public String getTouristAttractions(Model model) {
         List<TouristAttraction> attractions = touristService.getAllAttractions();
         model.addAttribute("attractions", attractions);
-        return "attractionList";
+        return "redirect:/attractionList";
     }
 
     @GetMapping("/{name}/tags")
@@ -37,7 +37,7 @@ public class TouristController {
         model.addAttribute("attraction", attraction);
         model.addAttribute("tags", touristService.getTouristAttractionTags(name));
 
-        return "tags";
+        return "redirect:/tags";
     }
 
     @GetMapping("/add")
@@ -45,7 +45,7 @@ public class TouristController {
         model.addAttribute("attraction", new TouristAttraction("", "", "",new ArrayList<>()));
         model.addAttribute("location", touristService.getAllLocations());
         model.addAttribute("Tags", touristService.getAllTags());
-        return "addAttraction";
+        return "redirect:/addAttraction";
     }
 
     @PostMapping("/save")
@@ -63,14 +63,9 @@ public class TouristController {
         model.addAttribute("attraction", attraction);
         model.addAttribute("Tags", touristService.getAllTags());
         model.addAttribute("Locations", touristService.getAllLocations());
-        return "editAttraction";
+        return "redirect:/editAttraction";
     }
-// TODO - VI SKAL HAVE KIGGET PÅ DEN - I DE TO ANDRE LAG
-//    @PostMapping("/update")
-//    public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
-//        touristService.updateAttraction(attraction);
-//        return "redirect:/attractions";
-//    }
+
     @PostMapping("/update")
     public ResponseEntity<TouristAttraction> updateAttraction(String attractionName, String newDescription) {
         TouristAttraction updatedAttraction = touristService.updateAttraction(attractionName, newDescription);
