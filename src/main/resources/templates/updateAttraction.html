@@ -5,7 +5,7 @@
     <link th:href="@{/main.css}" rel="stylesheet">
 </head>
 <body>
-<h1 th:text="'Opdate ' + ${attraction.name}"></h1>
+<h1 th:text="'Update ' + ${attraction.name}"></h1>
 
 <form th:action="@{/attractions/update}" th:object="${attraction}" method="post">
 
