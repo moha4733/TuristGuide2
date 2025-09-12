@@ -2,6 +2,8 @@ package com.example.touristguide2.Controller;
 
 import com.example.touristguide2.Model.TouristAttraction;
 import com.example.touristguide2.Service.TouristService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +45,6 @@ public class TouristController {
         model.addAttribute("attraction", new TouristAttraction("", "", "",new ArrayList<>()));
         model.addAttribute("location", touristService.getAllLocations());
         model.addAttribute("Tags", touristService.getAllTags());
-
         return "addAttraction";
     }
 
@@ -70,6 +71,16 @@ public class TouristController {
 //        touristService.updateAttraction(attraction);
 //        return "redirect:/attractions";
 //    }
+    @PostMapping("/update")
+    public ResponseEntity<TouristAttraction> updateAttraction(String attractionName, String newDescription) {
+        TouristAttraction updatedAttraction = touristService.updateAttraction(attractionName, newDescription);
+
+        if (updatedAttraction != null) {
+            return new ResponseEntity<>(updatedAttraction, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 
     @PostMapping("/delete/{name}")
     public String deleteAttraction(@PathVariable String name) {

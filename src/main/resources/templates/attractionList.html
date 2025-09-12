@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>Liste over turistattraktioner</h1>
+
 <table>
     <thead>
     <tr>
@@ -17,7 +18,7 @@
     </thead>
     <tbody>
     <label th:action="@{/attractions}" th:object="${attraction}" method="get">
-        <label th:each="attractions : ${attractions}"</label>
+        <label th:each="attractions : ${attractions}"></label>
     <input type="text" id="name" th:field="*{attractions}" required><br><br>
 
     Description:</label>

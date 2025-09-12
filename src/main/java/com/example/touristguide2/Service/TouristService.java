@@ -26,6 +26,10 @@ public class TouristService {
         return repository.findTouristAttractionByName(name);
     }
 
+    public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction) {
+        return repository.addTouristAttraction(touristAttraction);
+    }
+
     public List<String> getTouristAttractionTags(String name) {
         return repository.getTouristAttractionTags();
     }
@@ -35,10 +39,14 @@ public class TouristService {
     }
 
 //    public TouristAttraction updateAttraction(TouristAttraction attraction) {
-//        TouristRepository.saveAttraction(attraction);
+//        TouristRepository.updateAttraction(attraction);
 //        return attraction;
-//
 //    }
+
+    public TouristAttraction updateAttraction(String name, String newDescription) {
+        return repository.updateAttraction(name, newDescription);
+    }
+
     public List<String> getAllTags() {
         return repository.getTouristAttractionTags();
     }
