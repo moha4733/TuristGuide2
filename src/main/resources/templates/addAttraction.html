@@ -1,31 +1,31 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Registration Form</title>
-</head>
-<body>
-<h1>Attraction Registration Form</h1>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Registration Form</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Attraction Registration Form</h1>-->
 
-<form action="#" th:action="@{/a/register}" th:object="${user}" method="post">
-    <input type="hidden" th:field="*{userId}"/>
-    <label>Name</label>
-    <input type="text" th:field="*{name}">
-    <br>
-    <label>Email</label>
-    <input type="email" th:field="*{email}">
-    <br>
-    <label>User Role</label>
-    <select th:field="*{userRole}">
-        <option th:each="role: ${userRoles}" th:value="${role}" th:text="${role}"></option>
-    </select>
-    <br>
-    <button type="submit">Register</button>
-
-
+<!--<form action="#" th:action="@{/a/register}" th:object="${user}" method="post">-->
+<!--    <input type="hidden" th:field="*{userId}"/>-->
+<!--    <label>Name</label>-->
+<!--    <input type="text" th:field="*{name}">-->
+<!--    <br>-->
+<!--    <label>Email</label>-->
+<!--    <input type="email" th:field="*{email}">-->
+<!--    <br>-->
+<!--    <label>User Role</label>-->
+<!--    <select th:field="*{userRole}">-->
+<!--        <option th:each="role: ${userRoles}" th:value="${role}" th:text="${role}"></option>-->
+<!--    </select>-->
+<!--    <br>-->
+<!--    <button type="submit">Register</button>-->
 
 
 
-</form>
-</body>
-</html>
+
+
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
