@@ -31,3 +31,23 @@
 <a th:href="@{/attractions}">Back to overview</a>
 </body>
 </html>
+
+<br/>
+<form action="#" th:action="@{/save}" method="post" th:object="${TouristAttraction}">
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" /><br/>
+
+    <label>Description:</label>
+    <input type="text" th:field="*{description}" /><br/>
+
+    <label>Tags</label>
+    <input type="text" th:field="*{tag}" /><br/>
+
+    <label>Location:</label>
+    <select th:field="*{location}">
+        <option th:each="location: ${listLocations}" th:value="${location}" th:text="${location}"></option>
+    </select>
+    <br/>
+
+    <button type="submit">Save</button>
+</form>
