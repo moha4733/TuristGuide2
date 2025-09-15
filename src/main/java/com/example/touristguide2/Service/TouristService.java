@@ -23,15 +23,20 @@ public class TouristService {
     }
 
     public TouristAttraction findTouristAttractionByName(String name) {
-        return touristRepository.findTouristAttractionByName(name);
+        return touristRepository.getAllAttractions().stream()
+                .filter(a -> a.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
     }
+
+
 
     public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction) {
         return touristRepository.addTouristAttraction(touristAttraction);
     }
 
     public List<String> getTouristAttractionTags(String name) {
-        return touristRepository.getTouristAttractionTags();
+        return touristRepository.getTouristAttractionTags(name);
     }
 
     public TouristAttraction saveAttraction(TouristAttraction attraction) {
@@ -48,7 +53,7 @@ public class TouristService {
     }
 
     public List<String> getAllTags() {
-        return touristRepository.getTouristAttractionTags();
+        return touristRepository.getAllTags();
     }
 
     public List<String> getAllLocations() {

@@ -37,7 +37,7 @@ public class TouristController {
         model.addAttribute("attraction", attraction);
         model.addAttribute("tags", touristService.getTouristAttractionTags(name));
 
-        return "redirect:/tags";
+        return "tags";
     }
 
     @GetMapping("/add")

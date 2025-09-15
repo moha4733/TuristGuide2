@@ -53,13 +53,23 @@ public class TouristRepository {
         return null;
     }
 
-    public List<String> getTouristAttractionTags() {
+    public List<String> getTouristAttractionTags(String name) {
         return attractions.stream()
-                .flatMap(attraction -> attraction.getTags().stream())
+                .filter(attraction -> attraction.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .map(TouristAttraction::getTags)
+                .orElse(Collections.emptyList());
+    }
+
+    public List<String> getAllTags() {
+        return attractions.stream()
+                .flatMap(a -> a.getTags().stream())
                 .distinct()
                 .sorted()
                 .collect(Collectors.toList());
     }
+
+
 
     public List<String> getLocation() {
         return attractions.stream()
@@ -81,4 +91,5 @@ public class TouristRepository {
             return attraction;
         }
     }
+
 }
