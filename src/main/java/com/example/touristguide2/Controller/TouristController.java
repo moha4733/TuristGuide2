@@ -21,11 +21,11 @@ public class TouristController {
         this.touristService = touristService;
     }
 
-    @GetMapping("")
+    @GetMapping()
     public String getTouristAttractions(Model model) {
         List<TouristAttraction> attractions = touristService.getAllAttractions();
         model.addAttribute("attractions", attractions);
-        return "attractionList";
+        return "attractions";
     }
 
     @GetMapping("/{name}/tags")
