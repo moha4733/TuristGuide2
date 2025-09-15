@@ -13,7 +13,7 @@
         <td colspan="3">Der er ingen Attraktioner</td>
     </tr>
     <tr th:if="${!attractions.isEmpty()}">
-        <th>Name</th> <th>Description</th> <th>Tags</th>
+        <th>Name</th> <th>Description</th> <th>Tags</th> <th>Edit</th>
     </tr>
     <tr th:each="attraction : ${attractions}">
         <td th:text="${attraction.name}"></td>
