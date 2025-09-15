@@ -10,7 +10,7 @@
 <form th:action="@{/attractions/update}" th:object="${attraction}" method="post">
 
     <!-- Navnet må ikke ændres -->
-    <input type="hidden" th:field="*{name}">
+    <input type="hidden" id="name" th:field="*{name}">
 
     <label for="city">City:</label><br>
     <select id="city" th:field="*{city}">
