@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Turistattraktioner</title>
@@ -17,6 +17,26 @@
     </tr>
     </thead>
     <tbody>
+    <label th:action="@{/attractions}" th:object="${attraction}" method="get">
+        <label th:each="attractions : ${attractions}"></label>
+    <input type="text" id="name" th:field="*{attractions}" required><br><br>
+
+    Description:</label>
+    <input type="text" id="description" th:field="*{description}" required><br><br>
+
+    <label for="city">City:</label>
+    <input type="text" id="city" th:field="*{city}" required><br><br>
+
+    <button type="submit">Save attraction</button>
+    </form>
+
+    <tr th:each="attractions : ${attractions}">
+        <td th:text="${attractions.name}"></td>
+        <td th:text="${attractions.city}"></td>
+        <td th:text="${attractions.description}"></td>
+        <td><a th:href="@{/attractions/{name}/tags(name=${attractions.name})}">Tags</a></td>
+
+    </tr>
 
     </tbody>
 </table>

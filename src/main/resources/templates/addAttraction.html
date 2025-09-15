@@ -1,33 +1,31 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <title>Add new attraction</title>
-    <link th:href="@{/main.css}" rel="stylesheet">
-</head>
-<body>
-<h1>Add new attraction</h1>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Registration Form</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Attraction Registration Form</h1>-->
 
-<form th:action="@{/attractions/save}" th:object="${attraction}" method="post">
+<!--<form action="#" th:action="@{/a/register}" th:object="${user}" method="post">-->
+<!--    <input type="hidden" th:field="*{userId}"/>-->
+<!--    <label>Name</label>-->
+<!--    <input type="text" th:field="*{name}">-->
+<!--    <br>-->
+<!--    <label>Email</label>-->
+<!--    <input type="email" th:field="*{email}">-->
+<!--    <br>-->
+<!--    <label>User Role</label>-->
+<!--    <select th:field="*{userRole}">-->
+<!--        <option th:each="role: ${userRoles}" th:value="${role}" th:text="${role}"></option>-->
+<!--    </select>-->
+<!--    <br>-->
+<!--    <button type="submit">Register</button>-->
 
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" th:field="*{name}" required><br>
 
-    <label for="city">City:</label><br>
-    <select id="city" th:field="*{city}">
-        <option th:each="c : ${cities}" th:value="${c}" th:text="${c}"></option>
-    </select><br>
 
-    <label>Tags:</label><br>
-    <div th:each="tag : ${tags}">
-        <input type="checkbox" th:value="${tag}" th:field="*{tags}"> <span th:text="${tag}"></span><br>
-    </div>
 
-    <br>
-    <button type="submit">Save</button>
-    <a th:href="@{/attractions}">Cancel</a>
-</form>
 
-<br>
-<a th:href="@{/attractions}">Back to overview</a>
-</body>
-</html>
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
