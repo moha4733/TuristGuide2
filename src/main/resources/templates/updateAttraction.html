@@ -1,31 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Update attraction</title>
-    <link th:href="@{/main.css}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title th:text="'Edit: ' + ${attraction.name}">Update Tourist Attraction</title>
+    <link th:href="@{/main.css}" rel="stylesheet"/>
 </head>
 <body>
-<h1 th:text="'Update ' + ${attraction.name}"></h1>
 
-<form th:action="@{/attractions/update}" th:object="${attraction}" method="post">
+<h1 th:text="'Edit: ' + ${attraction.name}">Edit Attraction</h1>
 
-    <!-- Navnet må ikke ændres -->
-    <input type="hidden" id="name" th:field="*{name}">
+<form th:action="@{/attractions/{name}/update(name=${attraction.name})}"
+      th:object="${attraction}"
+      method="post">
 
-    <label for="city">City:</label><br>
-    <select id="city" th:field="*{city}">
-        <option th:each="c : ${cities}" th:value="${c}" th:text="${c}"
-                th:selected="${c == attraction.city}"></option>
-    </select><br>
+    <!-- Navn skjules, så det ikke ændres -->
+    <input type="hidden" th:field="*{name}"/>
 
-    <label>Tags:</label><br>
-    <div th:each="tag : ${tags}">
-        <input type="checkbox" th:value="${tag}" th:field="*{tags}"
-               th:checked="${attraction.tags.contains(tag)}"> <span th:text="${tag}"></span><br>
-    </div>
+    <label for="description">Description:</label><br/>
+    <textarea id="description" th:field="*{description}" rows="4" cols="50"></textarea>
+    <br/><br/>
 
-    <br>
-    <button type="submit">Save changes</button>
+    <label for="location">City:</label><br/>
+    <select id="location" th:field="*{location}">
+        <option value="">-- Select City --</option>
+        <option th:each="c : ${cities}"
+                th:value="${c}"
+                th:text="${c}">
+        </option>
+    </select>
+    <br/><br/>
+
+    <label>Tags:</label>
+    <fieldset id="tags">
+        <div th:each="t : ${tags}">
+            <label>
+                <input type="checkbox" th:field="*{tags}" th:value="${t}"/>
+                <span th:text="${t}"></span>
+            </label>
+        </div>
+    </fieldset>
+
+    <br/>
+    <button type="submit">Save Changes</button>
     <a th:href="@{/attractions}">Cancel</a>
 </form>
 

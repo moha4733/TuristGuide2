@@ -60,20 +60,19 @@ public class TouristController {
         if (attraction == null) {
             return "redirect:/attractions";
         }
+
         model.addAttribute("attraction", attraction);
-        model.addAttribute("Tags", touristService.getAllTags());
-        model.addAttribute("Locations", touristService.getAllLocations());
-        return "/editAttraction";
+        model.addAttribute("cities", touristService.getAllLocations()); // liste af byer
+        model.addAttribute("tags", touristService.getAllTags());        // liste af tags
+
+        return "updateAttraction";
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<TouristAttraction> updateAttraction(String attractionName, String newDescription) {
-        TouristAttraction updatedAttraction = touristService.updateAttraction(attractionName, newDescription);
-
-        if (updatedAttraction != null) {
-            return new ResponseEntity<>(updatedAttraction, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @PostMapping("/{name}/update")
+    public String updateAttraction(@PathVariable String name,
+                                   @ModelAttribute TouristAttraction attraction) {
+        touristService.saveAttraction(attraction);
+        return "redirect:/attractions";
     }
 
 
