@@ -1,32 +1,43 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Registration Form</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>Attraction Registration Form</h1>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tilføj Attraktion</title>
+</head>
+<body>
 
-<!--<form action="#" th:action="@{/a/register}" th:object="${user}" method="post">-->
-<!--    <input type="hidden" th:field="*{userId}"/>-->
-<!--    <label>Name</label>-->
-<!--    <input type="text" th:field="*{name}">-->
-<!--    <br>-->
-<!--    <label>Email</label>-->
-<!--    <input type="email" th:field="*{email}">-->
-<!--    <br>-->
-<!--    <label>User Role</label>-->
-<!--    <select th:field="*{userRole}">-->
-<!--        <option th:each="role: ${userRoles}" th:value="${role}" th:text="${role}"></option>-->
-<!--    </select>-->
-<!--    <br>-->
-<!--    <button type="submit">Register</button>-->
+<h1>Tilføj ny turistattraktion</h1>
 
+<form th:action="@{/attractions/save}" th:object="${attractions}" method="post">
 
+    <!-- Navn -->
+    <label for="name">Navn</label>
+    <input type="text" id="name" th:field="${name}" required>
+    <br>
 
+    <!-- Beskrivelse -->
+    <label for="description">Beskrivelse</label>
+    <textarea id="description" th:field="${description}" required></textarea>
+    <br>
 
+    <!-- Lokation -->
+    <label for="location">Lokation</label>
+    <select id="location" th:field="${location}">
+        <option th:each="loc : ${location}" th:value="${loc}" th:text="${loc}"></option>
+    </select>
+    <br>
 
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->
+    <!-- Tags -->
+    <label for="tags">Tags</label>
+    <select id="tags" multiple th:field="${tags}">
+        <option th:each="tag : ${Tags}" th:value="${tag}" th:text="${tag}"></option>
+    </select>
+    <br><br>
 
+    <button type="submit">Gem attraktion</button>
+</form>
+
+<a th:href="@{/attractions}"><button>Tilbage</button></a>
+
+</body>
+</html>
