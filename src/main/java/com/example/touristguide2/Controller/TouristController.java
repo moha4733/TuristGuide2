@@ -21,11 +21,11 @@ public class TouristController {
         this.touristService = touristService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public String getTouristAttractions(Model model) {
         List<TouristAttraction> attractions = touristService.getAllAttractions();
         model.addAttribute("attractions", attractions);
-        return "attractionList";
+        return "attractions";
     }
 
     @GetMapping("/{name}/tags")
@@ -37,15 +37,15 @@ public class TouristController {
         model.addAttribute("attraction", attraction);
         model.addAttribute("tags", touristService.getTouristAttractionTags(name));
 
-        return "redirect:/tags";
+        return "tags";
     }
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
-        model.addAttribute("attraction", new TouristAttraction("", "", "", new ArrayList<>()));
+        model.addAttribute("attraction", new TouristAttraction("", "", "",new ArrayList<>()));
         model.addAttribute("location", touristService.getAllLocations());
         model.addAttribute("Tags", touristService.getAllTags());
-        return "/addAttraction";
+        return "redirect:/addAttraction";
     }
 
     @PostMapping("/save")
@@ -63,7 +63,7 @@ public class TouristController {
         model.addAttribute("attraction", attraction);
         model.addAttribute("Tags", touristService.getAllTags());
         model.addAttribute("Locations", touristService.getAllLocations());
-        return "/editAttraction";
+        return "redirect:/editAttraction";
     }
 
     @PostMapping("/update")

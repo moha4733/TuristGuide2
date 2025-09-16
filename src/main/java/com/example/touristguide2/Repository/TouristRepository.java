@@ -8,23 +8,25 @@ import java.util.stream.Collectors;
 
 @Repository
 public class TouristRepository {
-    private final List<TouristAttraction> touristAttractions = new ArrayList<>();
+    private final List<TouristAttraction> attractions = new ArrayList<>(List.of(
+            new TouristAttraction("Den Lille Havfrue", "En ikonisk statue på Langelinie.", "København", Arrays.asList("landmark", "statue", "historie")),
+            new TouristAttraction("Junes El-Sayed", "useriøs spiller.", "Nykøbing Falster", Arrays.asList("fodbold", "spiller", "professionel diver")),
+            new TouristAttraction("Bella Sky", "En af Skandinaviens flotteste hoteller.", "Amager", Arrays.asList("hotel", "bygning", "arkitektur")),
+            new TouristAttraction("Amalienborg", "Det danske kongehus' residens.", "København", Arrays.asList("slot", "kongeligt", "historie")),
+            new TouristAttraction("SMK", "Museum for kunst.", "København", Arrays.asList("kunst", "galleri", "museum"))
+    ));
 
-    public TouristRepository() {
-        touristAttractions.add(new TouristAttraction("Den Lille Havfrue", "En ikonisk statue på Langelinie.", "København", Arrays.asList("landmark", "statue", "historie")));
-        touristAttractions.add(new TouristAttraction("Junes El-Sayed", "useriøs spiller.", "Nykøbing Falster", Arrays.asList("fodbold", "spiller", "professionel diver")));
-        touristAttractions.add(new TouristAttraction("Bella Sky", "En af Skandinaviens flotteste hoteller.", "Amager", Arrays.asList("hotel", "bygning", "arkitektur")));
-        touristAttractions.add(new TouristAttraction("Amalienborg", "Det danske kongehus' residens.", "København", Arrays.asList("slot", "kongeligt", "historie")));
-        touristAttractions.add(new TouristAttraction("SMK", "Museum for kunst.", "København", Arrays.asList("kunst", "galleri", "museum")));
+    public List<TouristAttraction> getAllAttractions() {
+        return attractions;
     }
 
     public TouristAttraction addTouristAttraction(TouristAttraction attraction) {
-        touristAttractions.add(attraction);
+        attractions.add(attraction);
         return attraction;
     }
 
     public TouristAttraction updateAttraction(String name, String description) {
-        for (TouristAttraction attraction : touristAttractions) {
+        for (TouristAttraction attraction : attractions) {
             if (attraction.getName().equalsIgnoreCase(name)) {
                 attraction.setDescription(description);
                 return attraction;
@@ -36,14 +38,14 @@ public class TouristRepository {
     public TouristAttraction deleteAttraction(String name) {
         TouristAttraction attractionToDelete = findTouristAttractionByName(name);
         if (attractionToDelete != null) {
-            touristAttractions.remove(attractionToDelete);
+            attractions.remove(attractionToDelete);
             return attractionToDelete;
         }
         return null;
     }
 
     public TouristAttraction findTouristAttractionByName(String name) {
-        for (TouristAttraction attraction : touristAttractions) {
+        for (TouristAttraction attraction : attractions) {
             if (attraction.getName().equalsIgnoreCase(name)) {
                 return attraction;
             }
@@ -51,20 +53,26 @@ public class TouristRepository {
         return null;
     }
 
-    public List<TouristAttraction> getAllAttractions() {
-        return new ArrayList<>(touristAttractions);
+    public List<String> getTouristAttractionTags(String name) {
+        return attractions.stream()
+                .filter(attraction -> attraction.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .map(TouristAttraction::getTags)
+                .orElse(Collections.emptyList());
     }
 
-    public List<String> getTouristAttractionTags() {
-        return touristAttractions.stream()
-                .flatMap(attraction -> attraction.getTags().stream())
+    public List<String> getAllTags() {
+        return attractions.stream()
+                .flatMap(a -> a.getTags().stream())
                 .distinct()
                 .sorted()
                 .collect(Collectors.toList());
     }
 
+
+
     public List<String> getLocation() {
-        return touristAttractions.stream()
+        return attractions.stream()
                 .map(TouristAttraction::getLocation)
                 .distinct()
                 .sorted()
@@ -79,8 +87,9 @@ public class TouristRepository {
             existing.setTags(attraction.getTags());
             return existing;
         } else {
-            touristAttractions.add(attraction);
+            attractions.add(attraction);
             return attraction;
         }
     }
+
 }
