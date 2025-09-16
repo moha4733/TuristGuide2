@@ -3,35 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Tilføj Attraktion</title>
+    <link th:href="@{/main.css}" rel="stylesheet">
 </head>
 <body>
 
 <h1>Tilføj ny turistattraktion</h1>
 
-<form th:action="@{/attractions/save}" th:object="${attractions}" method="post">
+<form th:action="@{/attractions/save}" th:object="${attraction}" method="post">
 
     <!-- Navn -->
     <label for="name">Navn</label>
-    <input type="text" id="name" th:field="${name}" required>
+    <input type="text" id="name" th:field="*{name}" required>
     <br>
 
     <!-- Beskrivelse -->
     <label for="description">Beskrivelse</label>
-    <textarea id="description" th:field="${description}" required></textarea>
+    <textarea id="description" th:field="*{description}" required></textarea>
     <br>
 
     <!-- Lokation -->
     <label for="location">Lokation</label>
-    <select id="location" th:field="${location}">
-        <option th:each="loc : ${location}" th:value="${loc}" th:text="${loc}"></option>
-    </select>
+    <input type="text" id="location" th:field="*{location}" placeholder="Skriv en lokation">
     <br>
 
     <!-- Tags -->
-    <label for="tags">Tags</label>
-    <select id="tags" multiple th:field="${tags}">
-        <option th:each="tag : ${Tags}" th:value="${tag}" th:text="${tag}"></option>
-    </select>
+    <label for="tags">Tags (adskil med komma)</label>
+    <input type="text" id="tags" th:field="*{tags}" placeholder="fx Museum, Historie, Natur">
     <br><br>
 
     <button type="submit">Gem attraktion</button>

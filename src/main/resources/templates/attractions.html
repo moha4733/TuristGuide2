@@ -10,16 +10,22 @@
 
 <table>
     <tr th:if="${attractions.isEmpty()}">
-        <td colspan="3">There is not a Attraction yet</td>
+        <td colspan="5">There are no attractions yet</td>
     </tr>
     <tr th:if="${!attractions.isEmpty()}">
-        <th>Name</th> <th>Description</th> <th>Tags</th> <th>Update</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Tags</th>
+        <th>Update</th>
     </tr>
     <tr th:each="attraction : ${attractions}">
         <td th:text="${attraction.name}"></td>
         <td th:text="${attraction.description}"></td>
-        <td><a th:href="@{'/attractions/' + ${attraction.name} + '/tags'}">Tags</a></td>
-        <td><a th:href="@{'/attractions/' + ${attraction.name} + '/Update'}">Update </a> </td>
+        <td th:text="${attraction.location}"></td>
+        <!-- Link til tags-side -->
+        <td><a th:href="@{'/attractions/' + ${attraction.name} + '/tags'}">View Tags</a></td>
+        <td><a th:href="@{'/attractions/' + ${attraction.name} + '/edit'}">Update</a></td>
     </tr>
 </table>
 
