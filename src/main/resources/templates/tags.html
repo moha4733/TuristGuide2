@@ -2,29 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="'Tags for ' + ${attraction.name}">Tags</title>
+    <title>Attraction Tags</title>
     <link th:href="@{/main.css}" rel="stylesheet">
 </head>
 <body>
-
-<h1 th:text="'Tags for ' + ${attraction.name}">Tags</h1>
-
-<table>
-    <tr th:if="${tags.isEmpty()}">
-        <td>Der er ingen tags for denne attraktion</td>
-    </tr>
-    <tr th:if="${!tags.isEmpty()}">
-        <th>Tag navn</th>
-    </tr>
-    <tr th:each="tag : ${tags}">
-        <td th:text="${tag.name}"></td>
-    </tr>
-</table>
-
-<a th:href="@{/attractions}">
-    <button>Tilbage til oversigten</button>
-</a>
-
+<h1 th:text="${attraction.name}"></h1>
+<h2>Tags:</h2>
+<ul>
+    <li th:each="tag : ${attraction.tags}" th:text="${tag}"></li>
+</ul>
+<a th:href="@{/attractions}">Return</a>
 </body>
 </html>
-git
+
+

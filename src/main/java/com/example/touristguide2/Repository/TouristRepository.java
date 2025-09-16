@@ -9,11 +9,11 @@ import java.util.stream.Collectors;
 @Repository
 public class TouristRepository {
     private final List<TouristAttraction> attractions = new ArrayList<>(List.of(
-            new TouristAttraction("Den Lille Havfrue", "En ikonisk statue på Langelinie.", "København", Arrays.asList("landmark", "statue", "historie")),
-            new TouristAttraction("Junes El-Sayed", "useriøs spiller.", "Nykøbing Falster", Arrays.asList("fodbold", "spiller", "professionel diver")),
-            new TouristAttraction("Bella Sky", "En af Skandinaviens flotteste hoteller.", "Amager", Arrays.asList("hotel", "bygning", "arkitektur")),
-            new TouristAttraction("Amalienborg", "Det danske kongehus' residens.", "København", Arrays.asList("slot", "kongeligt", "historie")),
-            new TouristAttraction("SMK", "Museum for kunst.", "København", Arrays.asList("kunst", "galleri", "museum"))
+            new TouristAttraction("Den Lille Havfrue", "En ikonisk statue på Langelinie.", "København", Arrays.asList("Landmark", "Statue", "Historie")),
+            new TouristAttraction("Junes El-Sayed", "Useriøs spiller.", "Nykøbing Falster", Arrays.asList("Fodbold", "Spiller", "Professionel diver")),
+            new TouristAttraction("Bella Sky", "En af Skandinaviens flotteste hoteller.", "Amager", Arrays.asList("Hotel", "Bygning", "Arkitektur")),
+            new TouristAttraction("Amalienborg", "Det danske kongehus' residens.", "København", Arrays.asList("Slot", "Kongeligt", "Historie")),
+            new TouristAttraction("SMK", "Museum for kunst.", "København", Arrays.asList("Kunst", "Galleri", "Museum"))
     ));
 
     public List<TouristAttraction> getAllAttractions() {
