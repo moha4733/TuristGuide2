@@ -1,13 +1,13 @@
 body {
     max-width: 500px;
     margin: auto;
-    background: #e61b1b;
+    background: #ffffff;
     padding: 10px;
 }
 
 h1 {
-    font-family: Arial;
-    font-size: 1.5em;
+    font-family: fantasy;
+    font-size: 2em;
 }
 
 label {
@@ -16,7 +16,7 @@ label {
 }
 
 table, th, td {
-    border: 1px solid #e80f0f;
+    border: 3px solid #000000;
     border-collapse: collapse;
     padding: 5px;
 }
