@@ -43,11 +43,6 @@ public class TouristService {
         return touristRepository.saveAttraction(attraction);
     }
 
-//    public TouristAttraction updateAttraction(TouristAttraction attraction) {
-//        TouristRepository.updateAttraction(attraction);
-//        return attraction;
-//    }
-
     public TouristAttraction updateAttraction(String name, String newDescription) {
         return touristRepository.updateAttraction(name, newDescription);
     }

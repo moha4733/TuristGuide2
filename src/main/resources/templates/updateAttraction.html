@@ -13,15 +13,15 @@
       th:object="${attraction}"
       method="post">
 
-    <!-- Navn gemmes skjult, så det ikke kan ændres -->
+
     <input type="hidden" th:field="*{name}"/>
 
-    <!-- Description -->
+
     <label for="description">Description:</label><br/>
     <textarea id="description" th:field="*{description}" rows="4" cols="50"></textarea>
     <br/><br/>
 
-    <!-- City med datalist (vælg eksisterende eller skriv ny) -->
+
     <label for="location">City:</label><br/>
     <input type="text" id="location" th:field="*{location}" list="cityOptions"/>
     <datalist id="cityOptions">
@@ -29,7 +29,7 @@
     </datalist>
     <br/><br/>
 
-    <!-- Tags som checkboxes -->
+
     <label>Tags:</label>
     <fieldset id="tags">
         <div th:each="t : ${tags}">

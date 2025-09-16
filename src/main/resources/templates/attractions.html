@@ -23,7 +23,7 @@
         <td th:text="${attraction.name}"></td>
         <td th:text="${attraction.description}"></td>
         <td th:text="${attraction.location}"></td>
-        <!-- Link til tags-side -->
+
         <td><a th:href="@{'/attractions/' + ${attraction.name} + '/tags'}">View Tags</a></td>
         <td><a th:href="@{'/attractions/' + ${attraction.name} + '/edit'}">Update</a></td>
     </tr>

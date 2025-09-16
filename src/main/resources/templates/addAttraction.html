@@ -11,22 +11,22 @@
 
 <form th:action="@{/attractions/save}" th:object="${attraction}" method="post">
 
-    <!-- Navn -->
+
     <label for="name">Navn</label>
     <input type="text" id="name" th:field="*{name}" required>
     <br>
 
-    <!-- Beskrivelse -->
+
     <label for="description">Beskrivelse</label>
     <textarea id="description" th:field="*{description}" required></textarea>
     <br>
 
-    <!-- Lokation -->
+
     <label for="location">Lokation</label>
     <input type="text" id="location" th:field="*{location}" placeholder="Skriv en lokation">
     <br>
 
-    <!-- Tags -->
+
     <label for="tags">Tags (adskil med komma)</label>
     <input type="text" id="tags" th:field="*{tags}" placeholder="fx Museum, Historie, Natur">
     <br><br>
