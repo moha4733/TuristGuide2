@@ -57,7 +57,7 @@ public class TouristService {
     }
 
     public List<String> getAllLocations() {
-        return touristRepository.getLocation();
+        return touristRepository.getAllLocation();
     }
 }
 

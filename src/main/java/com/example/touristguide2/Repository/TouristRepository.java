@@ -71,7 +71,7 @@ public class TouristRepository {
 
 
 
-    public List<String> getLocation() {
+    public List<String> getAllLocation() {
         return attractions.stream()
                 .map(TouristAttraction::getLocation)
                 .distinct()
