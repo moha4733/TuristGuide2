@@ -1,122 +1,139 @@
 package com.example.touristguide2.Repository;
 
 import com.example.touristguide2.Model.TouristAttraction;
-import jdk.internal.jimage.ImageStream;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
-public class TouristRepository{
+public class TouristRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public TouristRepository(JdbcTemplate jdbcTemplate){
+    public TouristRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<TouristAttraction>getAllAttractions(){
-        String sql = "SELECT * FROM attraction ";
-        return jdbcTemplate.query(sql,((rs, rowNum) -> ){
-            ImageStream rs;
+    // ------------------------
+    // CRUD for attraction
+    // ------------------------
+
+    public List<TouristAttraction> getAllAttractions() {
+        String sql = "SELECT * FROM attraction";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
             int id = rs.getInt("id");
             return new TouristAttraction(
                     rs.getString("name"),
                     rs.getString("description"),
                     rs.getString("location"),
-                    getTouristAttractionTags()
+                    getTouristAttractionTags(id)
             );
-        }
-    }
-
-
-
-//@Repository
-//public class TouristRepository {
-//    private final List<TouristAttraction> attractions = new ArrayList<>(List.of(
-//            new TouristAttraction("Den Lille Havfrue", "En ikonisk statue på Langelinie.", "København", Arrays.asList("Landmark", "Statue", "Historie")),
-//            new TouristAttraction("Junes El-Sayed", "Useriøs spiller.", "Nykøbing Falster", Arrays.asList("Fodbold", "Spiller", "Professionel diver")),
-//            new TouristAttraction("Bella Sky", "En af Skandinaviens flotteste hoteller.", "Amager", Arrays.asList("Hotel", "Bygning", "Arkitektur")),
-//            new TouristAttraction("Amalienborg", "Det danske kongehus' residens.", "København", Arrays.asList("Slot", "Kongeligt", "Historie")),
-//            new TouristAttraction("SMK", "Museum for kunst.", "København", Arrays.asList("Kunst", "Galleri", "Museum"))
-//    ));
-
-    public List<TouristAttraction> getAllAttractions() {
-        return attractions;
+        });
     }
 
     public TouristAttraction addTouristAttraction(TouristAttraction attraction) {
-        attractions.add(attraction);
+        // indsæt attraction
+        jdbcTemplate.update("INSERT INTO attraction (name, description, location) VALUES (?, ?, ?)",
+                attraction.getName(), attraction.getDescription(), attraction.getLocation());
+
+        // hent id på attraction
+        Integer id = jdbcTemplate.queryForObject("SELECT id FROM attraction WHERE name=?",
+                Integer.class, attraction.getName());
+
+        // gem tags
+        saveTagsForAttraction(id, attraction.getTags());
+
         return attraction;
     }
 
     public TouristAttraction updateAttraction(String name, String description) {
-        for (TouristAttraction attraction : attractions) {
-            if (attraction.getName().equalsIgnoreCase(name)) {
-                attraction.setDescription(description);
-                return attraction;
-            }
-        }
-        return null;
+        jdbcTemplate.update("UPDATE attraction SET description=? WHERE name=?", description, name);
+        return findTouristAttractionByName(name);
     }
 
     public TouristAttraction deleteAttraction(String name) {
-        TouristAttraction attractionToDelete = findTouristAttractionByName(name);
-        if (attractionToDelete != null) {
-            attractions.remove(attractionToDelete);
-            return attractionToDelete;
+        TouristAttraction existing = findTouristAttractionByName(name);
+        if (existing != null) {
+            jdbcTemplate.update("DELETE FROM attraction WHERE name=?", name);
         }
-        return null;
+        return existing;
     }
 
     public TouristAttraction findTouristAttractionByName(String name) {
-        for (TouristAttraction attraction : attractions) {
-            if (attraction.getName().equalsIgnoreCase(name)) {
-                return attraction;
-            }
-        }
-        return null;
-    }
-
-    public List<String> getTouristAttractionTags(String name) {
-        return attractions.stream()
-                .filter(attraction -> attraction.getName().equalsIgnoreCase(name))
-                .findFirst()
-                .map(TouristAttraction::getTags)
-                .orElse(Collections.emptyList());
-    }
-
-    public List<String> getAllTags() {
-        return attractions.stream()
-                .flatMap(a -> a.getTags().stream())
-                .distinct()
-                .sorted()
-                .collect(Collectors.toList());
-    }
-
-
-
-    public List<String> getAllLocation() {
-        return attractions.stream()
-                .map(TouristAttraction::getLocation)
-                .distinct()
-                .sorted()
-                .collect(Collectors.toList());
+        String sql = "SELECT * FROM attraction WHERE LOWER(name)=LOWER(?)";
+        List<TouristAttraction> list = jdbcTemplate.query(sql, (rs, rowNum) -> {
+            int id = rs.getInt("id");
+            return new TouristAttraction(
+                    rs.getString("name"),
+                    rs.getString("description"),
+                    rs.getString("location"),
+                    getTouristAttractionTags(id)
+            );
+        }, name);
+        return list.isEmpty() ? null : list.get(0);
     }
 
     public TouristAttraction saveAttraction(TouristAttraction attraction) {
         TouristAttraction existing = findTouristAttractionByName(attraction.getName());
         if (existing != null) {
-            existing.setDescription(attraction.getDescription());
-            existing.setLocation(attraction.getLocation());
-            existing.setTags(attraction.getTags());
-            return existing;
+            // update
+            jdbcTemplate.update("UPDATE attraction SET description=?, location=? WHERE name=?",
+                    attraction.getDescription(), attraction.getLocation(), attraction.getName());
+
+            // slet gamle tags
+            Integer id = jdbcTemplate.queryForObject("SELECT id FROM attraction WHERE name=?",
+                    Integer.class, attraction.getName());
+            jdbcTemplate.update("DELETE FROM attraction_tag WHERE attraction_id=?", id);
+
+            // gem nye tags
+            saveTagsForAttraction(id, attraction.getTags());
+            return findTouristAttractionByName(attraction.getName());
         } else {
-            attractions.add(attraction);
-            return attraction;
+            return addTouristAttraction(attraction);
         }
     }
 
+    // ------------------------
+    // Tags
+    // ------------------------
+
+    public List<String> getTouristAttractionTags(int attractionId) {
+        String sql = """
+            SELECT t.name
+            FROM tag t
+            JOIN attraction_tag at ON t.id = at.tag_id
+            WHERE at.attraction_id=?
+            """;
+        return jdbcTemplate.query(sql, (rs, rowNum) -> rs.getString("name"), attractionId);
+    }
+
+    public List<String> getAllTags() {
+        return jdbcTemplate.query("SELECT name FROM tag ORDER BY name",
+                (rs, rowNum) -> rs.getString("name"));
+    }
+
+    private void saveTagsForAttraction(Integer attractionId, List<String> tags) {
+        if (tags == null) return;
+        for (String tag : tags) {
+            // indsæt tag hvis den ikke findes
+            jdbcTemplate.update("INSERT IGNORE INTO tag (name) VALUES (?)", tag);
+
+            // link attraction og tag
+            jdbcTemplate.update("""
+                INSERT IGNORE INTO attraction_tag (attraction_id, tag_id)
+                VALUES (?, (SELECT id FROM tag WHERE name=?))
+                """, attractionId, tag);
+        }
+    }
+
+    // ------------------------
+    // Location
+    // ------------------------
+
+    public List<String> getAllLocation() {
+        return jdbcTemplate.query("SELECT DISTINCT location FROM attraction ORDER BY location",
+                (rs, rowNum) -> rs.getString("location"));
+    }
 }
