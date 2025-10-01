@@ -6,10 +6,10 @@ public class TouristAttraction {
     private String name;
     private String description;
     private String location;
-    private List<String> tags;
+    private int tags;
 
     // Constructor
-    public TouristAttraction(String name, String description, String location, List<String> tags) {
+    public TouristAttraction(String name, String description, String location, int tags) {
         this.name = name;
         this.description = description;
         this.location = location;
@@ -38,10 +38,10 @@ public class TouristAttraction {
         this.location = location;
     }
 
-    public List<String> getTags() {
+    public int getTags() {
         return tags;
     }
-    public void setTags(List<String> tags) {
+    public void setTags(int tags) {
         this.tags = tags;
     }
 }
