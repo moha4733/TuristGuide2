@@ -36,7 +36,9 @@ public class TouristService {
     }
 
     public List<String> getTouristAttractionTags(String name) {
-        return touristRepository.getTouristAttractionTags(name);
+        TouristAttraction a = touristRepository.findTouristAttractionByName(name);
+        if (a == null) return List.of();
+        return touristRepository.getTouristAttractionTags(a.getId());
     }
 
     public TouristAttraction saveAttraction(TouristAttraction attraction) {
@@ -53,6 +55,10 @@ public class TouristService {
 
     public List<String> getAllLocations() {
         return touristRepository.getAllLocation();
+    }
+
+    public List<String> getTagsForAttraction(int attractionId){
+        return touristRepository.getTagsForAttraction(attractionId);
     }
 }
 

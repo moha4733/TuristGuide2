@@ -1,6 +1,7 @@
 package com.example.touristguide2.Repository;
 
 import com.example.touristguide2.Model.TouristAttraction;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -28,9 +29,13 @@ public class TouristRepository {
                     rs.getString("name"),
                     rs.getString("description"),
                     rs.getString("location"),
-                    getTouristAttractionTags(id)
+                    getTagsForAttraction(id)
             );
         });
+    } catch (EmptyResultDataAccessException e){
+        return null;{
+
+        }
     }
 
     public TouristAttraction addTouristAttraction(TouristAttraction attraction) {
@@ -69,7 +74,7 @@ public class TouristRepository {
                     rs.getString("name"),
                     rs.getString("description"),
                     rs.getString("location"),
-                    getTouristAttractionTags(id)
+                    getTagsForAttraction(id)
             );
         }, name);
         return list.isEmpty() ? null : list.get(0);
@@ -98,6 +103,11 @@ public class TouristRepository {
     // ------------------------
     // Tags
     // ------------------------
+
+    public List<String> getTagsForAttraction(int attractionId) {
+        String sql = "SELECT t.name FROM tag t JOIN attraction_tag at ON t.id = at.tag_id WHERE at.attraction_id = ?";
+        return jdbcTemplate.query(sql, new Object[]{attractionId}, (rs, rowNum) -> rs.getString("name"));
+        }
 
     public List<String> getTouristAttractionTags(int attractionId) {
         String sql = """

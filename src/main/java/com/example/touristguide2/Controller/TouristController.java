@@ -2,8 +2,6 @@ package com.example.touristguide2.Controller;
 
 import com.example.touristguide2.Model.TouristAttraction;
 import com.example.touristguide2.Service.TouristService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +40,7 @@ public class TouristController {
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
-        model.addAttribute("attraction", new TouristAttraction("", "", "",new ArrayList<>()));
+        model.addAttribute("attraction", new TouristAttraction("", "", "", new ArrayList<>()));
         model.addAttribute("location", touristService.getAllLocations());
         model.addAttribute("Tags", touristService.getAllTags());
         return "/addAttraction";
