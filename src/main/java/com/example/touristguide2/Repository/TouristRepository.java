@@ -22,7 +22,7 @@ public class TouristRepository {
     // ------------------------
 
     public List<TouristAttraction> getAllAttractions() {
-        String sql = "SELECT * FROM attraction";
+        String sql = "SELECT id, name, description, location FROM attraction";
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             int id = rs.getInt("id");
             return new TouristAttraction(
@@ -32,10 +32,7 @@ public class TouristRepository {
                     getTagsForAttraction(id)
             );
         });
-    } catch (EmptyResultDataAccessException e){
-        return null;{
 
-        }
     }
 
     public TouristAttraction addTouristAttraction(TouristAttraction attraction) {
